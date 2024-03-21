@@ -1,0 +1,19 @@
+package net.kdigital.ajaxTest.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+
+@Controller
+public class AjaxController {
+
+	@GetMapping("/ajaxForm1")
+	public String form1() {
+		return "ajax_form_1";
+	}
+	
+	@GetMapping("/ajaxReq1")
+	public String ajaxReq1() {
+		System.out.println("ajax 요청 도착");
+		return "ajax_form_1";
+	}
+}

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script th:src="@{/script/jquery-3.7.1.min.js}"></script>
+    <script>
+        // jQuery('document').ready(function()
+        // document가 준비되면 function() 실행 
+        $(function () {
+            // tag.css("color", "red");
+            // let result = $('h2').css({ "color": "blue", "background-color": "yellow" });
+            // console.log(result);
+        });
+    </script>
+
+</head>
+
+<body>
+    <h2>jQuery 연습</h2>
+    <ul>
+        <li><a th:href="@{/selector}">1. 선택자 연습</a></li>
+        <li><a th:href="@{/filter}">2. 필터 선택자 연습</a></li>
+        <li><a th:href="@{/filterMethod}">3. 필터 메소드 연습</a></li>
+        <li><a th:href="@{/manipulation}">4. DOM 조작 메소드</a></li>
+        <li><a th:href="@{/classTest}">5. Class 조작</a></li>
+        <li><a th:href="@{/exam1}">6. 연습문제 (고객관리)</a></li>
+        <li><a th:href="@{/traversing}">7. Traversing / Method Chaining</a></li>
+        <li><a th:href="@{/each}">8. 반복처리 (each)</a></li>
+        <li><a th:href="@{/exam2}">9. 연습문제 (고객관리)</a></li>
+    </ul>
+
+</body>
+
+</html>

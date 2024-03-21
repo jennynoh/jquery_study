@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://thymeleaf">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class Test</title>
+    <style>
+        img {
+            background-color: #555;
+        }
+
+        img.type1 {
+            background-color: #ede963;
+        }
+
+        img.type2 {
+            background-color: #50c870;
+        }
+
+        img.type3 {
+            background-color: #a36361;
+        }
+
+        img.type4 {
+            background-color: #d4adca;
+        }
+    </style>
+    <script th:src="@{/script/jquery-3.7.1.min.js}"></script>
+    <script>
+        $(function () {
+            $("img").on('click', function () {
+                let n = Math.ceil(Math.random() * 5);
+                let existClass = $(this).attr("class");
+                $(this).removeClass(existClass).addClass("type" + n);
+            });
+
+            $("input").on('change', function () {
+                let status = $(this);
+
+                // prop: 동적으로 값이 바뀜 
+                // is, attr: 한 번 읽고 동작하지 않음
+                $("#result").html(
+                    ".attr('checked'): <b>" + status.attr("checked") + "</b><br>" +
+                    ".prop('checked'): <b>" + status.prop("checked") + "</b><br>" +
+                    ".is('checked'): <b>" + status.is("checked") + "</b><br>"
+                )
+            });
+        });
+    </script>
+
+</head>
+
+<body>
+    <h2>클래스(스타일) 조작 메소드 (removeClass(), addClass())</h2>
+    <div>
+        <img th:src="@{/images/dog_1.png}">
+        <img th:src="@{/images/dog_2.png}">
+        <img th:src="@{/images/dog_3.png}">
+        <img th:src="@{/images/dog_4.png}">
+    </div>
+    <hr>
+
+    <h2>DOM 메소드 (is(), attr(), prop())</h2>
+    <p>
+        <input type="checkbox" id="check1" checked="checked">
+        <label for="check1">체크박스를 선택해주세요.</label><br>
+    <div id="result"></div>
+    </p>
+
+</body>
+
+</html>

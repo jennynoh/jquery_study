@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://thymeleaf">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manipulation</title>
+    <script th:src="@{/script/jquery-3.7.1.min.js}"></script>
+    <script>
+        $(function () {
+            // on click = addEventListener
+            $("#btn1").on('click', function () {
+                let mytext = $("p#mytext").text();
+                $("#target").text(mytext);
+            });
+
+            $("#btn2").on('click', function () {
+                // .html(): html 태그를 해석
+                let text = "원숭이 엉덩이는 <b>빠알개</b>";
+                $("#target").html(text);
+            });
+
+            $("#btn3").on('click', function () {
+                // attr(): 전달인자 1개: get, 전달인자 2개: set
+                let img = $("img")
+                if (img.attr("class") == "img1") {
+                    img.attr("class", "img2");
+                    img.attr("src", "/images/img_2.jpeg");
+                } else {
+                    img.attr("class", "img1");
+                    img.attr("src", "/images/img_1.jpeg");
+                }
+            });
+
+            $("#read").on('click', function () {
+                let temp1 = $("#temp1").val();
+                $("#target").html(temp1);
+            });
+
+            $("#write").on('click', function () {
+                let target = $("#target").html();
+                $("#temp2").val(target);
+            })
+
+            // result tag의 마지막 요소로 삽입
+            $("#append").on('click', function () {
+                let data = "<div>반갑습니다.</div>";
+                $("#result").append(data);
+            });
+
+            // result tag의 첫번째 요소로 삽입 
+            $("#prepend").on('click', function () {
+                let data = "<div>잘지내셨나요?</div>";
+                $("#result").prepend(data);
+            });
+
+
+        });
+    </script>
+
+</head>
+
+<body>
+    <h2>DOM 조작메소드(html(), text(), attr())</h2>
+    <p>
+        <input type="button" id="btn1" value="글씨복사 1">
+        <input type="button" id="btn2" value="글씨복사 2">
+        <input type="button" id="btn3" value="이미지 변경">
+    </p>
+    <p id="mytext">원숭이 엉덩이는 빨개</p>
+    <p id="target"></p>
+    <p><img th:src="@{/images/img_1.jpeg}" class="img1" width="300px"></p>
+
+    <h2>Form 데이터값 읽어오기(val())</h2>
+    <div>
+        <input type="button" id="read" value="read">
+        <input type="button" id="write" value="write">
+        <input type="text" id="temp1">
+        <input type="text" id="temp2">
+    </div>
+
+    <h2>DOM 조작 메소드(append(), prepend())</h2>
+    <div>
+        <input type="button" id="append" value="Append">
+        <input type="button" id="prepend" value="Prepend">
+        <p id="result">
+            <span>안녕하세요.</span>
+        </p>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filter Selector</title>
+    <script th:src="@{/script/jquery-3.7.1.min.js}"></script>
+    <script>
+        $(function () {
+            $("tr:first").css("background-color", "gray");
+            $("tr:odd").css("background-color", "pink");
+            $("td:nth-child(3n+1)").css("color", "blue");
+            $("td:nth-child(3n+2)").css("font-weight", "bold");
+        });
+    </script>
+</head>
+
+<body>
+    <h2>필터 선택자</h2>
+    <table border="1px">
+        <!-- tbody가 강제로 삽입됨 -->
+        <tr>
+            <th>이름</th>
+            <th>전화번호</th>
+            <th>주소</th>
+        </tr>
+        <tr>
+            <td>노재은</td>
+            <td>010</td>
+            <td>수지구</td>
+        </tr>
+        <tr>
+            <td>윤하진</td>
+            <td>1234</td>
+            <td>성복동</td>
+        </tr>
+        <tr>
+            <td>노명진</td>
+            <td>4321</td>
+            <td>성동마을</td>
+        </tr>
+    </table>
+
+</body>
+
+</html>

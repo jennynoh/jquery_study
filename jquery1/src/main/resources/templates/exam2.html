@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>연습문제 2</title>
+    <script th:src="@{/script/jquery-3.7.1.min.js}"></script>
+    <script>
+        $(function () {
+            $("#register").on('click', function () {
+                let name = $("input#name").val();
+                let address = $("input#address").val();
+                let phone = $("input#phone").val();
+                let grade = $("select#grade").val();
+
+                let userinfo = `<tr><td><input type="checkbox"></td><td>${name}</td><td>${address}</td><td>${phone}</td><td>${grade}</td></tr>`;
+                $("#memberTable").children(":last").append(userinfo);
+
+                // document.getElementById("customer").reset();
+                // 불가: $(#myform)
+
+                resetAll();
+
+            });
+
+            function resetAll() {
+                $("input:text").val('');
+                $("select#grade").val('');
+            }
+
+            $("#deleteMember").on('click', function () {
+                $("#memberTable input:checkbox:checked").parent().parent().remove();
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div id="container">
+        <h2 id="title">[ 고객관리 목록 ]</h2>
+        <div>
+            <form id="customer">
+                <!-- 고객정보 입력 -->
+                <label for="name">이름</label>
+                <input type="text" id="name" , name="name">&nbsp;
+                <label for="address">주소</label>
+                <input type="text" id="address" , name="address">&nbsp;
+                <label for="phone">전화번호</label>
+                <input type="text" id="phone" name="phone">&nbsp;
+                <label for="grade">고객등급</label>
+                <select name="grade" id="grade">
+                    <option value="jasmin">자스민</option>
+                    <option value="gold">골드</option>
+                    <option value="silver">실버</option>
+                    <option value="normal">일반</option>
+                </select>
+                <input type="button" id="register" value="등록">
+            </form>
+        </div><br>
+        <div id="action">
+            전체선택 <input type="checkbox" id="checkAll">
+            <input type="button" id="deleteMember" value="삭제">
+        </div><br>
+
+        <table id="memberTable">
+            <tr>
+                <th>선택</th>
+                <th>이름(이메일)</th>
+                <th>주소</th>
+                <th>전화번호</th>
+                <th>고객등급</th>
+            </tr>
+            <tr>
+                <td><input type="checkbox"></td>
+                <td>보라돌이 (bora@naver.com)</td>
+                <td>서울시 관악구 낙성대동</td>
+                <td>010-1234-1234</td>
+                <td>최우수</td>
+            </tr>
+        </table>
+    </div>
+</body>
+
+</html>

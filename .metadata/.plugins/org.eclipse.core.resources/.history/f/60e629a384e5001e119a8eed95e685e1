@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script th:src="@{/script/jquery-3.7.1.min.js}"></script>
+    <script>
+        // jQuery('document').ready(function()
+        // document가 준비되면 function() 실행 
+        $(function () {
+            alert("jquery alert");
+        });
+    </script>
+</head>
+
+<body>
+
+    <h2>동작하나요?</h2>
+</body>
+
+</html>

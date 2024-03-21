@@ -1,0 +1,29 @@
+package net.kdigital.ajaxTest.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+@Controller
+public class AjaxController {
+
+	@GetMapping("/ajaxForm1")
+	public String form1() {
+		return "ajax_form_1";
+	}
+	
+	@GetMapping("/ajaxReq1")
+	public String ajaxReq1() {
+		System.out.println("ajax 요청 도착");
+		return "ajax_form_1"; // html 페이지가 아닌 data를 의미한다 
+	}
+	
+	@PostMapping("/ajaxReq2")
+	public String ajaxReq2(
+			@RequestParam(name="username") String username
+			, @RequestParam(name="email") String email) {
+		System.out.println(username+", "+email);
+		return "success";
+	}
+}

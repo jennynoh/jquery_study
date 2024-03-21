@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Each</title>
+    <style>
+        div {
+            width: 100px;
+            height: 100px;
+            border: 2px solid gray;
+            float: left;
+            margin: 10px;
+        }
+
+        hr {
+            clear: both;
+        }
+
+        div#item {
+            width: 200px;
+            height: 200px;
+            border: 2px solid gray;
+        }
+    </style>
+    <script th:src="@{/script/jquery-3.7.1.min.js}"></script>
+    <script>
+        $(function () {
+            let color = ['red', 'orange', 'blue', 'yellow', 'green'];
+            let tag = $("div");
+            console.log(tag.length);
+
+            $.each(tag, function (index, item) {
+                // $(item).css("background-color", color[index]);
+                $(this).css("background-color", color[index]);
+            });
+
+            // 일정시간마다 색을 랜덤발생시켜 적용 (0~255)
+            setInterval(() => {
+                let red = Math.floor(Math.random() * 256);
+                let green = Math.floor(Math.random() * 256);
+                let blue = Math.floor(Math.random() * 256);
+
+                $("div#item").css("background-color", "rgb(" + red + "," + green + "," + blue + ")");
+            }, 1000);
+        });
+    </script>
+</head>
+
+<body>
+    <h2>반복 메소드 - 1</h2>
+    <div>One</div>
+    <div>Two</div>
+    <div>Three</div>
+    <div>Four</div>
+    <div>Five</div>
+
+    <hr>
+    <h2>반복 메소드 - 2</h2>
+    <div id="item"></div>
+
+</body>
+
+</html>

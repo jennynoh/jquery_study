@@ -1,0 +1,5 @@
+package net.kdigital.ajaxTest.dto;
+
+public class CustomerDTO {
+
+}

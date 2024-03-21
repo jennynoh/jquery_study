@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>연습문제</title>
+    <script th:src="@{/script/jquery-3.7.1.min.js}"></script>
+    <script>
+        $(function () {
+            $("#checkAll").on('change', function () {
+                if ($(this).is(":checked")) {
+                    $("#memberTable input:checkbox").prop("checked", true);
+                } else {
+                    $("#memberTable input:checkbox").prop("checked", false);
+                };
+            });
+
+            $("#deleteMember").on('click', function () {
+                let data = $("#memberTable input:checkbox:checked").parent().parent();
+                data.remove();
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div id="container">
+        <h2 id="title">[ 고객관리 목록 ]</h2>
+        <div>
+            <form action="" method="post">
+                <select name="searchType">
+                    <option value="name">이름</option>
+                    <option value="grade">고객등급</option>
+                </select>
+                <input type="text" name="searchText">
+                <input type="button" value="검색">
+            </form>
+        </div><br>
+        <div id="action">
+            전체선택 <input type="checkbox" id="checkAll">
+            <input type="button" id="deleteMember" value="삭제">
+        </div><br>
+
+        <table id="memberTable">
+            <tr>
+                <th>선택</th>
+                <th>이름(이메일)</th>
+                <th>주소</th>
+                <th>전화번호</th>
+                <th>고객등급</th>
+            </tr>
+            <tr>
+                <td><input type="checkbox"></td>
+                <td>보라돌이 (bora@naver.com)</td>
+                <td>서울시 관악구 낙성대동</td>
+                <td>010-1234-1234</td>
+                <td>최우수</td>
+            </tr>
+            <tr>
+                <td><input type="checkbox"></td>
+                <td>뚜비 (ttu@naver.com)</td>
+                <td>서울시 관악구 사당동</td>
+                <td>010-1222-4141</td>
+                <td>일반</td>
+            </tr>
+            <tr>
+                <td><input type="checkbox"></td>
+                <td>나나 (nana@naver.com)</td>
+                <td>용인시 수지구 성복동</td>
+                <td>010-1234-1234</td>
+                <td>우수</td>
+            </tr>
+            <tr>
+                <td><input type="checkbox"></td>
+                <td>뽀 (bbo@naver.com)</td>
+                <td>인천광역시 중구</td>
+                <td>010-0999-3843</td>
+                <td>일반</td>
+            </tr>
+            <tr>
+                <td><input type="checkbox"></td>
+                <td>쿠키 (coockie@naver.com)</td>
+                <td>서울시 송파구</td>
+                <td>010-1111-2224</td>
+                <td>최우수</td>
+            </tr>
+        </table>
+    </div>
+</body>
+
+</html>

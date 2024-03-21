@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selector</title>
+    <style>
+        .myclass {
+            width: 200px;
+            height: 40px;
+            float: left;
+            padding: 20px;
+            margin: 20px;
+            background-color: #eee;
+        }
+
+        #clear {
+            clear: both;
+        }
+    </style>
+    <script th:src="@{/script/jquery-3.7.1.min.js}"></script>
+    <script>
+        $(function () {
+            // div 태그 내부의 모든 하위태그 선택 
+            let element = $("#test").find("*").css("border", "3px solid red").length;
+            console.log(element); // 4
+            // prepend(): 요소 추가 
+            $("body").prepend("<h2>" + element + "개의 요소가 선택됨</h2>");
+
+            // myclass와 yourclass를 모두 가지고 있는 요소의 border
+            $(".myclass.yourclass").css("border", "3px solid blue");
+
+            //
+            $("#wrap a[href]").css({ "color": "#A36361" });
+            $("#wrap a[href$=net]").css({ "background-color": "#D2A29D" });
+
+            //
+            $("#member :text").css({ "background-color": "#f0f" });
+            $("#member :password").css({ "background-color": "#0ff" });
+        });
+    </script>
+</head>
+
+<body>
+    <h2>기본 선택자 (요소, 전체, 클래스)</h2>
+    <div id="test">
+        여기도 선택이 될까? 안되네 태그만 선택됨
+        <div>Div tag</div>
+        <span>Span tag</span>
+        <p>P tag <button>Button tag</button></p>
+    </div>
+
+    <hr>
+    <h2>클래스 선택자</h2>
+    <div class="myclass">div.myclass</div>
+    <div class="myclass yourclass">div.myclass.yourclass</div>
+    <span class="myclass yourclass">span.myclass.yourclass</span>
+
+    <hr id="clear">
+    <h2>속성 선택자</h2>
+    <div id="wrap">
+        <p><a href="http://google.co.kr">구글</a></p>
+        <p><a href="http://naver.com">네이버</a></p>
+        <p><a href="http://daum.net">다음</a></p>
+    </div>
+    <form id="member">
+        <p>아이디: <input type="text" id="userid"></p>
+        <p>비밀번호: <input type="password" id="userpwd"></p>
+    </form>
+</body>
+
+</html>

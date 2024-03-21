@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajax Test</title>
+    <script th:src="@{/script/jquery-3.7.1.min.js}"></script>
+    <script>
+        $(function () {
+            $("#reqBtn1").on('click', ajax_req1);
+            $("#reqBtn2").on('click', ajax_req2);
+            $("#reqBtn3").on('click', ajax_req3);
+            $("#reqBtn4").on('click', ajax_req4);
+        });
+
+        function ajax_req1() {
+            $.ajax({
+                // 기본 get 방식 
+                url: "ajaxReq1"
+                , method: "GET"
+                , success: function (resp) {
+                    alert("success!");
+                }
+            })
+        }
+
+        function ajax_req2() {
+            // 입력한 데이터 수집 
+            let username = $("#username").val();
+            let email = $("#email").val();
+            let sendData = { "username": username, "email": email };
+            // json을 string 형태로 보낸다면..
+            // JSON.parse(sendData)
+            // JSON.stringify(sendData)
+
+            $.ajax({
+                url: 'ajaxReq2'
+                , method: 'POST'
+                , data: sendData
+                , success: function (resp) {
+                    $("#result").html("<span style='color:red;'>" + resp + "</span>");
+                }
+            })
+        }
+
+        function ajax_req3() {
+            let username = $("#username").val();
+            let email = $("#email").val();
+            let sendData = { "username": username, "email": email };
+
+            $.ajax({
+                url: 'ajaxReq3'
+                , method: 'POST'
+                , data: sendData
+                , success: function (resp) {
+                    let result = `이름: ${resp["username"]}<br>이메일:${resp["email"]}`
+                    $("#result").html(result);
+                }
+            })
+        }
+
+        function ajax_req4() {
+            $.ajax({
+                url: 'ajaxReq4'
+                , method: 'GET'
+                , success: output
+            })
+        }
+
+        function output(resp) {
+            // $.each(resp, function(index, item) {
+            //     let name = item['username'];
+            //     let email = item['email'];
+            //     result += `이름: ${username} 이메일:${email}<br>`;
+            // })
+            let result = "";
+            for (let i = 0; i < resp.length; ++i) {
+                let username = resp[i]["username"];
+                let email = resp[i]["email"];
+                result += `이름: ${username} 이메일:${email}<br>`;
+            }
+            $("#result2").html(result);
+
+        }
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <h2>[ Ajax 요청 ]</h2>
+        <P>1. Ajax로 요청 보내기 (서버 콘솔창에서 확인)</P>
+        <input type="button" id="reqBtn1" value="요청보내기">
+        <br>
+
+        <p>2. 데이터 보내기</p>
+        <input type="text" id="username" placeholder="이름을 입력해주세요.">
+        <input type="text" id="email" placeholder="이메일을 입력해주세요."> <br>
+        <input type="button" id="reqBtn2" value="데이터 전송">
+        <input type="button" id="reqBtn3" value="데이터 송수신">
+
+        <h2 id="result"></h2>
+
+        <p>3. 다량의 데이터 수신</p>
+        <input type="button" id="reqBtn4" value="데이터 수신">
+        <h2 id="result2"></h2>
+    </div>
+
+</body>
+
+</html>

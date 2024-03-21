@@ -1,0 +1,5 @@
+package net.kdigital.ajaxTest.controller;
+
+public class AjaxController {
+
+}
