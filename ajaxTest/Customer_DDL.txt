@@ -1,0 +1,11 @@
+DROP TABLE customer;
+DROP SEQUENCE customer_seq;
+
+CREATE TABLE customer
+(
+    customer_num NUMBER PRIMARY KEY
+    , username VARCHAR2(30)
+    , email VARCHAR2(30)
+);
+
+CREATE SEQUENCE customer_seq;

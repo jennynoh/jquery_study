@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajax Test</title>
+    <script th:src="@{/script/jquery-3.7.1.min.js}"></script>
+    <script>
+        $(function () {
+            // 등록된 모든 데이터를 DB로부터 가져와서 출력 
+            init();
+            $("input#add").on('click', add);
+
+            // DB의 정보 가져와서 초기화 
+            function init() {
+                $.ajax({
+                    url: 'selectAll'
+                    , method: 'GET'
+                    , success: outputAll
+                });
+            }
+
+            // 초기화면에 데이터 뿌려주는 함수   
+            function outputAll(resp) {
+                let receivedData = '';
+                $.each(resp, function (index, item) {
+                    receivedData += `
+                    <tr>
+                        <td>${item["customerNum"]}</td>
+                        <td>${item["username"]}</td>
+                        <td>${item["email"]}</td>
+                        <td><input type="button" class="delBtn" value="삭제" data-no="${item['customerNum']}"></td>
+                    </tr>`;
+                });
+
+                $("table").children(":last").append(receivedData);
+                // 동적으로 생성되는 객체는 DOM상에 존재하지 않기 때문에 뿌려줄 때 event를 걸어주어야함
+                $(".delBtn").on('click', deleteCustomer);
+            }
+
+            // 등록했을 때 작동하는 함수 
+            function add() {
+                let username = $("#username").val();
+                let email = $("#email").val();
+                // 보내려고 하는 데이터 변수명은 dto의 변수명과 동일해야함 
+                let sendData = { "username": username, "email": email };
+
+                $.ajax({
+                    url: 'insert'
+                    , method: 'POST'
+                    , data: sendData
+                    , success: output
+                })
+            }
+
+            // 등록버튼 click 시 호출되는 함수 
+            function output(resp) {
+                let receivedData = `
+                    <tr>
+                        <td>${resp["customerNum"]}</td>
+                        <td>${resp["username"]}</td>
+                        <td>${resp["email"]}</td>
+                        <td><input type="button" class="delBtn" value="삭제" data-no="${resp['customerNum']}"></td>
+                    </tr>`;
+
+                $("table").children(":last").append(receivedData);
+                $(".delBtn").on('click', deleteCustomer);
+            }
+
+            // 삭제버튼 click 시 호출되는 함수
+            function deleteCustomer() {
+                // ajax function 안에서 호출하기 위해 변수에 저장 
+                let data = $(this);
+                if (!confirm("삭제하시겠습니까?")) return;
+
+                $.ajax({
+                    url: 'delete'
+                    , method: 'GET'
+                    , data: { "customerNum": data.attr("data-no") }
+                    , success: function (resp) {
+                        console.log(typeof resp);
+                        if (resp) {
+                            alert("삭제가 성공적으로 진행되었습니다! :)");
+                            // this는 function을 지칭하기 때문에 사용할 수 없음 
+                            data.parent().parent().remove();
+                        } else {
+                            alert("삭제 실패! :(")
+                        }
+
+                    }
+                })
+            }
+
+        });
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <h2>[ 고객정보 관리 ]</h2>
+        <!-- ajax를 통해서 데이터 전송 -->
+        <!-- reset 버튼 동작을 위한 form -->
+        <form>
+            <input type="text" id="username" placeholder="이름을 입력해주세요."> &nbsp;
+            <input type="text" id="email" placeholder="이메일을 입력해주세요.">
+            <input type="button" id="add" value="등록">
+            <input type="reset" value="취소">
+        </form>
+
+        <h2 id="result"></h2>
+        <table border="1" width="400px">
+            <tr>
+                <th>고객번호</th>
+                <th>이름</th>
+                <th>이메일</th>
+                <th>삭제</th>
+            </tr>
+        </table>
+    </div>
+
+</body>
+
+</html>

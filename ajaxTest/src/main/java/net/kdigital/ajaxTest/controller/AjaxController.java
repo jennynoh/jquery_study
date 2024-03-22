@@ -48,11 +48,11 @@ public class AjaxController {
 	@ResponseBody
 	public List<CustomerDTO> ajaxReq4() {
 		List<CustomerDTO> list = Arrays.asList(
-				new CustomerDTO("홍길동", "hong@naver.com")
-				, new CustomerDTO("홍두동", "two@naver.com")
-				, new CustomerDTO("홍세동", "three@naver.com")
-				, new CustomerDTO("홍네동", "fourg@naver.com")
-				, new CustomerDTO("홍오동", "five@naver.com")
+				new CustomerDTO(1L, "홍길동", "hong@naver.com")
+				, new CustomerDTO(2L, "홍두동", "two@naver.com")
+				, new CustomerDTO(3L, "홍세동", "three@naver.com")
+				, new CustomerDTO(4L, "홍네동", "fourg@naver.com")
+				, new CustomerDTO(5L, "홍오동", "five@naver.com")
 				);
 		return list;
 	}
